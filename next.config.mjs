@@ -49,7 +49,7 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
-  output: "standalone",
+  output: process.env.VERCEL ? undefined : "standalone",
 
   // Next's file tracing misses @swc/helpers/esm (loaded dynamically via
   // require-hook at runtime) with pnpm — force-include the whole package.
