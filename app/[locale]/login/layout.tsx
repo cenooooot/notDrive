@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Login - Zee Index",
-  description: "Halaman login untuk mengakses Zee Index",
+  title: "Login - NOT CLOUD",
+  description: "Halaman login untuk mengakses NOT CLOUD",
 };
 export default function LoginLayout({
   children,

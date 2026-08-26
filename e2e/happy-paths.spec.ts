@@ -21,7 +21,7 @@ test.describe("Happy Paths & Security Flows", () => {
 
   test("home lands on setup, login, or app shell", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Zee Index/i);
+    await expect(page).toHaveTitle(/NOT CLOUD/i);
 
     const path = new URL(page.url()).pathname;
     const isOk =

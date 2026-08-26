@@ -9,8 +9,8 @@ export const GET = createPublicRoute(
   async ({ request }) => {
     try {
       const { searchParams } = new URL(request.url);
-      const title = searchParams.get("title") || "Zee Index";
-      const appName = process.env.NEXT_PUBLIC_APP_NAME || "Zee Index";
+      const title = searchParams.get("title") || "NOT CLOUD";
+      const appName = process.env.NEXT_PUBLIC_APP_NAME || "NOT CLOUD";
       const locale = searchParams.get("locale") === "id" ? "id" : "en";
       const messages =
         locale === "id" ? idMessages.OgImage : enMessages.OgImage;

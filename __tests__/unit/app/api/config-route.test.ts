@@ -27,7 +27,7 @@ describe("app/api/config route", () => {
 
   it("returns public app config", async () => {
     mockGetPublicAppConfig.mockResolvedValue({
-      appName: "Zee Index",
+      appName: "NOT CLOUD",
       disableGuestLogin: false,
     });
 
@@ -35,7 +35,7 @@ describe("app/api/config route", () => {
 
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual({
-      appName: "Zee Index",
+      appName: "NOT CLOUD",
       disableGuestLogin: false,
     });
   });

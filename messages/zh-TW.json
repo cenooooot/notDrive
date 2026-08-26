@@ -52,7 +52,7 @@
     "accessRequestSuccess": "已成功向管理員送出存取請求。",
     "requestFail": "送出請求失敗。",
     "accessGranted": "已授權存取！正在載入資料夾...",
-    "securityEngine": "Zee Index 安全引擎 v2.0",
+    "securityEngine": "NOT CLOUD 安全引擎 v2.0",
     "loginFailedText": "憑證無效"
   },
   "Search": {
@@ -159,6 +159,7 @@
     "adminDashboard": "管理員儀表板",
     "switchTheme": "切換主題",
     "github": "GitHub",
+    "discord": "Discord 伺服器",
     "telegram": "Telegram 群組",
     "logout": "登出",
     "dialogLabel": "全域指令選單"
@@ -298,7 +299,7 @@
     "unknownUser": "未知"
   },
   "LoginPage": {
-    "title": "Zee Index",
+    "title": "NOT CLOUD",
     "subtitle": "安全且快速地存取你的檔案。",
     "emailLabel": "電子郵件",
     "passwordLabel": "密碼",
@@ -899,7 +900,7 @@
     "add": "新增"
   },
   "BrandingConfig": {
-    "appNamePlaceholder": "Zee Index",
+    "appNamePlaceholder": "NOT CLOUD",
     "taglinePlaceholder": "預設（空白）",
     "logoUrlPlaceholder": "https://example.com/logo.png",
     "faviconUrlPlaceholder": "https://example.com/favicon.ico",
@@ -978,7 +979,7 @@
       "invalidExpire": "expiresIn 格式無效。請使用例如：1h、7d、30d",
       "tokenExpired": "權杖缺少到期時間。",
       "createFail": "建立分享連結失敗。",
-      "emailSubject": "[Zee Index] 已建立新的 {type} 連結",
+      "emailSubject": "[NOT CLOUD] 已建立新的 {type} 連結",
       "emailHello": "管理員您好",
       "emailBody": "使用者 <b>{email}</b> 已建立新的 {type} 連結。",
       "collection": "集合",

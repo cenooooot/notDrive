@@ -44,7 +44,7 @@ export default function BrandingConfig() {
 
   useEffect(() => {
     setFormState({
-      appName: appName || "Zee Index",
+      appName: appName || "NOT CLOUD",
       logoUrl: logoUrl || "",
       faviconUrl: faviconUrl || "",
       primaryColor: primaryColor || "",

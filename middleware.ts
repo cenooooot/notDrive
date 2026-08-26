@@ -301,28 +301,28 @@ export default async function middleware(request: NextRequest) {
         : DEFAULT_LOCALE;
       const translations = {
         en: {
-          title: "Access Denied - Zee Index",
+          title: "Access Denied - NOT CLOUD",
           heading: "Access Denied",
           message:
             "Sorry, only administrators can access the Setup page.<br>Please login with an admin account.",
           button: "Login as Admin",
-          footer: "Zee Index",
+          footer: "NOT CLOUD",
         },
         id: {
-          title: "Akses Ditolak - Zee Index",
+          title: "Akses Ditolak - NOT CLOUD",
           heading: "Akses Ditolak",
           message:
             "Maaf, hanya admin yang dapat mengakses halaman Setup.<br>Silakan login dengan akun admin.",
           button: "Login sebagai Admin",
-          footer: "Zee Index",
+          footer: "NOT CLOUD",
         },
         "zh-TW": {
-          title: "拒絕訪問 - Zee Index",
+          title: "拒絕訪問 - NOT CLOUD",
           heading: "拒絕訪問",
           message:
             "抱歉，只有管理員才能訪問設置頁面。<br>請使用管理員帳戶登錄。",
           button: "以管理員身分登錄",
-          footer: "Zee Index",
+          footer: "NOT CLOUD",
         },
       };
       const t =

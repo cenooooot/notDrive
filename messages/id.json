@@ -52,7 +52,7 @@
     "accessRequestSuccess": "Permintaan akses berhasil dikirim ke Admin.",
     "requestFail": "Gagal mengirim permintaan.",
     "accessGranted": "Akses diberikan! Memuat folder...",
-    "securityEngine": "Zee Index Security Engine v2.0",
+    "securityEngine": "NOT CLOUD Security Engine v2.0",
     "loginFailedText": "Kredensial salah"
   },
   "Search": {
@@ -159,6 +159,7 @@
     "adminDashboard": "Dashboard Admin",
     "switchTheme": "Ganti Tema",
     "github": "GitHub",
+    "discord": "Server Discord",
     "telegram": "Grup Telegram",
     "logout": "Keluar",
     "dialogLabel": "Menu Perintah Global"
@@ -298,7 +299,7 @@
     "unknownUser": "Tidak diketahui"
   },
   "LoginPage": {
-    "title": "Zee Index",
+    "title": "NOT CLOUD",
     "subtitle": "Akses file Anda dengan aman dan cepat.",
     "emailLabel": "Email",
     "passwordLabel": "Kata Sandi",
@@ -888,7 +889,7 @@
     "add": "Tambah"
   },
   "BrandingConfig": {
-    "appNamePlaceholder": "Zee Index",
+    "appNamePlaceholder": "NOT CLOUD",
     "taglinePlaceholder": "Default (Kosong)",
     "logoUrlPlaceholder": "https://example.com/logo.png",
     "faviconUrlPlaceholder": "https://example.com/favicon.ico",
@@ -967,7 +968,7 @@
       "invalidExpire": "Format expiresIn tidak valid. Gunakan format: 1h, 7d, 30d",
       "tokenExpired": "Token tidak memiliki waktu kedaluwarsa.",
       "createFail": "Gagal membuat tautan berbagi.",
-      "emailSubject": "[Zee Index] Tautan {type} Baru Dibuat",
+      "emailSubject": "[NOT CLOUD] Tautan {type} Baru Dibuat",
       "emailHello": "Halo Admin",
       "emailBody": "Tautan {type} baru telah dibuat oleh <b>{email}</b>.",
       "collection": "Koleksi",

@@ -406,7 +406,7 @@ pnpm docker:prod      # Docker Compose production stack
 | Variable                           | Description                            | Default     |
 | ---------------------------------- | -------------------------------------- | ----------- |
 | `NEXT_PUBLIC_ROOT_FOLDER_NAME`     | Display name for root folder           | `Home`      |
-| `NEXT_PUBLIC_APP_NAME`             | Custom application name                | `Zee Index` |
+| `NEXT_PUBLIC_APP_NAME`             | Custom application name                | `NOT CLOUD` |
 | `NEXT_PUBLIC_MANUAL_DRIVES`        | JSON array of additional drives        | `[]`        |
 | `NEXT_PUBLIC_ENABLE_LOCAL_STORAGE` | Enable local filesystem provider       | —           |
 | `PRIVATE_FOLDER_IDS`               | JSON array of private folder IDs       | `[]`        |
@@ -435,7 +435,7 @@ Send alerts when the incident monitor detects issues (storage full, service down
 | `SMTP_PORT`  | SMTP port                    | `465`                              |
 | `SMTP_USER`  | SMTP username                | —                                  |
 | `SMTP_PASS`  | SMTP password / app password | —                                  |
-| `EMAIL_FROM` | Sender email address         | `Zee Index <no-reply@example.com>` |
+| `EMAIL_FROM` | Sender email address         | `NOT CLOUD <no-reply@example.com>` |
 
 ### Storage Providers (Optional)
 
@@ -509,7 +509,7 @@ SKIP_ENV_VALIDATION=false
 # SMTP_PORT="465"
 # SMTP_USER="your-email@gmail.com"
 # SMTP_PASS="your-app-password"
-# EMAIL_FROM="Zee Index <no-reply@example.com>"
+# EMAIL_FROM="NOT CLOUD <no-reply@example.com>"
 
 # 8. NOTIFICATIONS (Optional)
 # NOTIFY_DISCORD_WEBHOOK="https://discord.com/api/webhooks/..."

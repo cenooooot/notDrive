@@ -17,11 +17,11 @@ import {
   Star,
   Home,
   Github,
-  Send,
   File,
   Folder,
   Loader2,
 } from "lucide-react";
+import DiscordIcon from "@/components/common/DiscordIcon";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 
@@ -234,16 +234,16 @@ export default function CommandPalette() {
           </Command.Item>
 
           <Command.Item
-            value="telegram grup komunitas"
+            value="discord grup komunitas server"
             onSelect={() =>
               runCommand(() =>
-                window.open("https://t.me/RyzeeenUniverse", "_blank"),
+                window.open("https://discord.com/invite/EbHzsm7mWr", "_blank"),
               )
             }
             className={itemClass}
           >
-            <Send className="mr-2 h-4 w-4" />
-            <span>{t("telegram")}</span>
+            <DiscordIcon className="mr-2 h-4 w-4" />
+            <span>{t("discord")}</span>
           </Command.Item>
         </Command.Group>
 

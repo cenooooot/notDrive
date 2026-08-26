@@ -52,7 +52,7 @@
     "accessRequestSuccess": "Access request sent successfully to Admin.",
     "requestFail": "Failed to send request.",
     "accessGranted": "Access granted! Loading folder...",
-    "securityEngine": "Zee Index Security Engine v2.0",
+    "securityEngine": "NOT CLOUD Security Engine v2.0",
     "loginFailedText": "Invalid credentials"
   },
   "Search": {
@@ -159,6 +159,7 @@
     "adminDashboard": "Admin Dashboard",
     "switchTheme": "Switch Theme",
     "github": "GitHub",
+    "discord": "Discord Server",
     "telegram": "Telegram Group",
     "logout": "Logout",
     "dialogLabel": "Global Command Menu"
@@ -298,7 +299,7 @@
     "unknownUser": "Unknown"
   },
   "LoginPage": {
-    "title": "Zee Index",
+    "title": "NOT CLOUD",
     "subtitle": "Access your files securely and quickly.",
     "emailLabel": "Email",
     "passwordLabel": "Password",
@@ -888,7 +889,7 @@
     "add": "Add"
   },
   "BrandingConfig": {
-    "appNamePlaceholder": "Zee Index",
+    "appNamePlaceholder": "NOT CLOUD",
     "taglinePlaceholder": "Default (Empty)",
     "logoUrlPlaceholder": "https://example.com/logo.png",
     "faviconUrlPlaceholder": "https://example.com/favicon.ico",
@@ -967,7 +968,7 @@
       "invalidExpire": "Invalid expiresIn format. Use formats like: 1h, 7d, 30d",
       "tokenExpired": "Token missing expiration time.",
       "createFail": "Failed to create share link.",
-      "emailSubject": "[Zee Index] New {type} Link Created",
+      "emailSubject": "[NOT CLOUD] New {type} Link Created",
       "emailHello": "Hello Admin",
       "emailBody": "A new {type} link has been created by <b>{email}</b>.",
       "collection": "Collection",

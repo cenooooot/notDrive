@@ -100,3 +100,4 @@ public/swe-worker-*.js
 # Local Storage Cloud
 /storage/
 repomix-output.xml
+.vercel

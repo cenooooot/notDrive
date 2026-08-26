@@ -10,7 +10,6 @@ import {
   Sun,
   Moon,
   RefreshCw,
-  Send,
   Search as SearchIcon,
   Menu,
   LogIn,
@@ -21,6 +20,7 @@ import {
   PanelLeft,
   HelpCircle,
 } from "lucide-react";
+import DiscordIcon from "@/components/common/DiscordIcon";
 import { useAppStore } from "@/lib/store";
 import Search from "@/components/features/Search";
 import { AnimatePresence, motion } from "framer-motion";
@@ -227,11 +227,11 @@ export default function Header() {
       label: t("github"),
     },
     {
-      id: "telegram",
-      href: "https://t.me/RyzeeenUniverse",
+      id: "discord",
+      href: "https://discord.com/invite/EbHzsm7mWr",
       target: "_blank",
       rel: "noopener noreferrer",
-      icon: Send,
+      icon: DiscordIcon,
       label: t("joinGroup"),
     },
     {
@@ -242,7 +242,7 @@ export default function Header() {
     },
   ];
 
-  const publicShareLinkItems = ["theme", "refresh", "github", "telegram"];
+  const publicShareLinkItems = ["theme", "refresh", "github", "discord"];
 
   const handleLogoClick = () => {
     if (!shareToken) {
@@ -349,7 +349,7 @@ export default function Header() {
                   className="w-8 h-8 mr-3 dark:invert"
                 />
               )}
-              <span className="font-bold">{appName || "Zee Index"}</span>
+              <span className="font-bold">{appName || "NOT CLOUD"}</span>
             </h1>
           </div>
 

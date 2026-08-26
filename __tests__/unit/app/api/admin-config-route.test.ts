@@ -44,7 +44,7 @@ describe("app/api/admin/config route", () => {
     mockGetAppConfig.mockResolvedValue({
       hideAuthor: false,
       disableGuestLogin: false,
-      appName: "Zee Index",
+      appName: "NOT CLOUD",
       logoUrl: "",
       faviconUrl: "",
       primaryColor: "",
@@ -52,7 +52,7 @@ describe("app/api/admin/config route", () => {
     mockUpdateAppConfig.mockResolvedValue({
       hideAuthor: false,
       disableGuestLogin: true,
-      appName: "Zee Index",
+      appName: "NOT CLOUD",
       logoUrl: "https://example.com/logo.png",
       faviconUrl: "",
       primaryColor: "#112233",
@@ -70,7 +70,7 @@ describe("app/api/admin/config route", () => {
       expect.objectContaining({
         hideAuthor: false,
         disableGuestLogin: false,
-        appName: "Zee Index",
+        appName: "NOT CLOUD",
         logoUrl: "",
         faviconUrl: "",
         primaryColor: "",
@@ -104,7 +104,7 @@ describe("app/api/admin/config route", () => {
       config: {
         hideAuthor: false,
         disableGuestLogin: true,
-        appName: "Zee Index",
+        appName: "NOT CLOUD",
         logoUrl: "https://example.com/logo.png",
         faviconUrl: "",
         primaryColor: "#112233",

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const APP_CONFIG_KEY = "zee-index:config";
-const DEFAULT_APP_NAME = "Zee Index";
+const DEFAULT_APP_NAME = "NOT CLOUD";
 
 const emptyUrl = z.literal("");
 const relativeUrl = z.string().startsWith("/");

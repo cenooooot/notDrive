@@ -79,7 +79,7 @@ async function sendUploadNotificationEmail(
 
     await sendMail({
       to: adminEmails,
-      subject: `[Zee Index] File Request Upload: ${fileName}`,
+      subject: `[NOT CLOUD] File Request Upload: ${fileName}`,
       html: `
         <h3>Notifikasi Unggah File Request</h3>
         <p>File baru telah berhasil diunggah melalui tautan File Request:</p>
