@@ -52,10 +52,14 @@ const nextConfig = {
   output: process.env.VERCEL ? undefined : "standalone",
 
   // Next's file tracing misses @swc/helpers/esm (loaded dynamically via
-  // require-hook at runtime) with pnpm — force-include the whole package.
-  outputFileTracingIncludes: {
-    "/**/*": ["./node_modules/@swc/helpers/**/*"],
-  },
+  // require-hook at runtime) with pnpm in standalone mode.
+  ...(process.env.VERCEL
+    ? {}
+    : {
+        outputFileTracingIncludes: {
+          "/**/*": ["./node_modules/@swc/helpers/**/*"],
+        },
+      }),
 
   typescript: {
     ignoreBuildErrors: false,
