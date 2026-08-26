@@ -494,7 +494,7 @@
     "fileTypes": "Documents, Photos, Videos, etc.",
     "startUpload": "Start Upload",
     "uploadFailed": "Failed to upload some files. Please try again.",
-    "poweredBy": "Powered by Zee-Index",
+    "poweredBy": "Powered by NOT CLOUD",
     "senderSubfolder": "Sender Name / Subfolder (Optional)",
     "senderSubfolderPlaceholder": "Example: Budi Santoso or Assignment-1"
   },
@@ -743,7 +743,7 @@
     "skip": "Skip",
     "steps": {
       "welcome": {
-        "title": "Welcome to Zee-Index!",
+        "title": "Welcome to NOT CLOUD!",
         "description": "Let's take a quick tour to help you get started with your new file manager."
       },
       "mobileMenu": {

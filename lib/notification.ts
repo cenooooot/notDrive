@@ -95,7 +95,7 @@ export async function sendTelegramNotification(text: string): Promise<void> {
 export function formatIncidentNotification(incident: IncidentRecord): string {
   const triggered = new Date(incident.lastTriggeredAt).toISOString();
   return [
-    "🚨 *Zee-Index Alert*",
+    "🚨 *NOT CLOUD Alert*",
     `*Severity:* ${incident.severity.toUpperCase()}`,
     `*Incident:* ${incident.title}`,
     incident.description,

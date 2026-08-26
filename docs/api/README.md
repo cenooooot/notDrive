@@ -1,8 +1,8 @@
-# Zee-Index API Documentation
+# NOT CLOUD API Documentation
 
 ## Overview
 
-This folder contains the maintained API reference for Zee-Index.
+This folder contains the maintained API reference for NOT CLOUD.
 
 - `openapi.yaml` documents the core public, share, auth, admin, and health endpoints that are actively maintained.
 - The complete route inventory lives under [`app/api`](/C:/Users/Ifauze/Project/zee-index/app/api).

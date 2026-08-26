@@ -223,7 +223,7 @@ async function notifyIncident(incident: IncidentRecord): Promise<void> {
   const existingCooldown = await kv.get<number>(cooldownKey);
   if (existingCooldown) return;
 
-  const subject = `[Zee-Index Alert] ${incident.severity.toUpperCase()} - ${incident.title}`;
+  const subject = `[NOT CLOUD Alert] ${incident.severity.toUpperCase()} - ${incident.title}`;
   const html = `
     <h2>${incident.title}</h2>
     <p>${incident.description}</p>

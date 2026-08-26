@@ -16,7 +16,7 @@ export const POST = createUserRoute(
       }
 
       const secret = authenticator.generateSecret();
-      const appName = "Zee-Index";
+      const appName = "NOT CLOUD";
 
       await kv.set(`2fa:secret:temp:${userEmail}`, secret, { ex: 300 });
 

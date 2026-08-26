@@ -496,7 +496,7 @@
     "fileTypes": "文件、照片、影片等。",
     "startUpload": "開始上傳",
     "uploadFailed": "部分檔案上傳失敗，請再試一次。",
-    "poweredBy": "由 Zee-Index 提供技術支援",
+    "poweredBy": "由 NOT CLOUD 提供技術支援",
     "senderSubfolder": "寄件者名稱 / 子資料夾（選填）",
     "senderSubfolderPlaceholder": "範例：Budi Santoso 或 Assignment-1"
   },
@@ -754,7 +754,7 @@
     "skip": "略過",
     "steps": {
       "welcome": {
-        "title": "歡迎使用 Zee-Index！",
+        "title": "歡迎使用 NOT CLOUD！",
         "description": "讓我們快速導覽一下，幫助你開始使用這個新的檔案管理器。"
       },
       "mobileMenu": {

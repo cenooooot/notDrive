@@ -27,10 +27,10 @@ export function getOpenApiDocument() {
   return generator.generateDocument({
     openapi: "3.0.3",
     info: {
-      title: "Zee-Index API",
+      title: "NOT CLOUD API",
       version: "1.0.0",
       description:
-        "REST API for Zee-Index — a self-hosted Google Drive Explorer, CMS & streaming platform. All authenticated routes use NextAuth.js JWT sessions. Admin routes require ADMIN or EDITOR role.",
+        "REST API for NOT CLOUD — a self-hosted Google Drive Explorer, CMS & streaming platform. All authenticated routes use NextAuth.js JWT sessions. Admin routes require ADMIN or EDITOR role.",
     },
     servers: [
       {

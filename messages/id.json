@@ -494,7 +494,7 @@
     "fileTypes": "Dokumen, Foto, Video, dll.",
     "startUpload": "Mulai Unggah",
     "uploadFailed": "Gagal mengunggah sebagian file. Silakan coba lagi.",
-    "poweredBy": "Powered by Zee-Index",
+    "poweredBy": "Powered by NOT CLOUD",
     "senderSubfolder": "Nama Pengirim / Subfolder (Opsional)",
     "senderSubfolderPlaceholder": "Contoh: Budi Santoso atau Tugas-1"
   },
@@ -743,7 +743,7 @@
     "skip": "Lewati",
     "steps": {
       "welcome": {
-        "title": "Selamat Datang di Zee-Index!",
+        "title": "Selamat Datang di NOT CLOUD!",
         "description": "Mari ikuti tur singkat untuk membantu Anda memulai dengan manajer file baru Anda."
       },
       "mobileMenu": {

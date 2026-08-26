@@ -19,7 +19,7 @@ There is no default admin password. You must **create and set it yourself** in t
 ### How do I log in for the first time?
 
 1. Make sure your `.env` has `ADMIN_EMAILS` and either `ADMIN_PASSWORD` or `ADMIN_PASSWORD_HASH`.
-2. Open your Zee-Index site (e.g., `http://localhost:3000`).
+2. Open your NOT CLOUD site (e.g., `http://localhost:3000`).
 3. Click the **Login** button or navigate to `/login`.
 4. Enter the email and the password you defined in your `.env` file.
 
@@ -39,7 +39,7 @@ To fix this warning:
 ### How do I get the Google Drive Root Folder ID?
 
 1. Open Google Drive in your browser.
-2. Navigate to the folder you want to use as the root directory for Zee-Index.
+2. Navigate to the folder you want to use as the root directory for NOT CLOUD.
 3. Look at the URL in your browser. It will look like this: `https://drive.google.com/drive/folders/1ABcDeFgHiJkLmNoPqRsT...`
 4. Copy the string of characters after `/folders/`. This is your Folder ID.
 5. Paste it into your `.env` file as `NEXT_PUBLIC_ROOT_FOLDER_ID="1ABcDeFgHiJkLmNoPqRsT..."`.

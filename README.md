@@ -1,9 +1,5 @@
 <div align="center">
-  <a href="https://github.com/ifauzeee/Zee-Index">
-    <img src="https://raw.githubusercontent.com/ifauzeee/Zee-Index/main/public/Zee-Index-Logo.png" alt="Zee-Index Logo" width="200" height="200">
-  </a>
-
-  <h1 align="center">⚡ Zee-Index</h1>
+  <h1 align="center">⚡ NOT CLOUD</h1>
 
   <p align="center">
     <strong>Self-Hosted Google Drive Explorer, CMS & Streaming Platform</strong>
@@ -15,9 +11,8 @@
   </p>
 
   <div align="center">
-    <a href="https://ifauzeee.vercel.app/projects/zee-index/preview"><img src="https://img.shields.io/badge/🔎_Preview-View-8A2BE2?style=for-the-badge" alt="Preview" /></a>
-    <a href="https://github.com/ifauzeee/Zee-Index/issues"><img src="https://img.shields.io/badge/🐛_Report_Bug-Issues-FFA500?style=for-the-badge" alt="Report Bug" /></a>
-    <a href="https://github.com/ifauzeee/Zee-Index/pulls"><img src="https://img.shields.io/badge/✨_Feature_Request-PRs-28A745?style=for-the-badge" alt="Feature Request" /></a>
+    <a href="https://github.com/cenooooot/notDrive/issues"><img src="https://img.shields.io/badge/🐛_Report_Bug-Issues-FFA500?style=for-the-badge" alt="Report Bug" /></a>
+    <a href="https://github.com/cenooooot/notDrive/pulls"><img src="https://img.shields.io/badge/✨_Feature_Request-PRs-28A745?style=for-the-badge" alt="Feature Request" /></a>
   </div>
 
   <br />
@@ -188,7 +183,7 @@ flowchart TB
         B["Auto-HTTPS · Let's Encrypt\n:443 → :3000"]
     end
 
-    subgraph APP["⚡ Zee-Index Application"]
+    subgraph APP["⚡ NOT CLOUD Application"]
         C["API Routes"]
         D["Middleware\nAuth · i18n · Rate Limit"]
         E["Server Components\nStreaming SSR"]
@@ -231,12 +226,12 @@ flowchart TB
 
 ### 🐳 Quick Start with Docker (Recommended)
 
-The fastest way to get Zee-Index running with **PostgreSQL**, **Redis**, **auto-HTTPS**, all preconfigured:
+The fastest way to get NOT CLOUD running with **PostgreSQL**, **Redis**, **auto-HTTPS**, all preconfigured:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/ifauzeee/Zee-Index.git
-cd Zee-Index
+git clone https://github.com/cenooooot/notDrive.git
+cd not-drive
 
 # 2. Copy environment template
 cp .env.example .env
@@ -278,8 +273,8 @@ For contributors or those who prefer local development with hot reload:
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/ifauzeee/Zee-Index.git
-cd Zee-Index
+git clone https://github.com/cenooooot/notDrive.git
+cd not-drive
 pnpm install
 
 # 2. Configure environment
@@ -439,7 +434,7 @@ Send alerts when the incident monitor detects issues (storage full, service down
 
 ### Storage Providers (Optional)
 
-By default Zee-Index serves files from **Google Drive**. You can instead (or in addition) mount an **S3 / Cloudflare R2** bucket or a **WebDAV** server (e.g. Nextcloud) by setting `STORAGE_PROVIDER` and the matching credentials. Files from the active provider appear under a virtual root in the file browser, alongside the Google Drive root.
+By default NOT CLOUD serves files from **Google Drive**. You can instead (or in addition) mount an **S3 / Cloudflare R2** bucket or a **WebDAV** server (e.g. Nextcloud) by setting `STORAGE_PROVIDER` and the matching credentials. Files from the active provider appear under a virtual root in the file browser, alongside the Google Drive root.
 
 | Variable                       | Description                                                            | Default        |
 | ------------------------------ | ---------------------------------------------------------------------- | -------------- |
@@ -551,11 +546,12 @@ SKIP_ENV_VALIDATION=false
 
 ### VPS / DigitalOcean
 
-Zee-Index is optimized for deployment on low-resource VPS instances (1 CPU / 1 GB RAM):
+NOT CLOUD is optimized for deployment on low-resource VPS instances (1 CPU / 1 GB RAM):
 
 ```bash
-# 1. SSH into your server
-ssh root@your-server-ip
+# 1. Clone on VPS
+git clone https://github.com/cenooooot/notDrive.git
+cd not-drive
 
 # 2. Install Docker
 curl -fsSL https://get.docker.com | sh
@@ -565,8 +561,7 @@ adduser zee && usermod -aG docker zee
 su - zee
 
 # 4. Clone and configure
-git clone https://github.com/ifauzeee/Zee-Index.git
-cd Zee-Index
+cd not-drive
 cp .env.example .env
 nano .env  # Configure all required variables
 
@@ -582,7 +577,7 @@ docker compose logs -f   # Watch startup logs
 
 | Container   | Memory Limit | Typical Usage |
 | ----------- | ------------ | ------------- |
-| `zee-index` | 512 MB       | ~300 MB       |
+| `not-drive` | 512 MB       | ~300 MB       |
 | `postgres`  | 200 MB       | ~50 MB        |
 | `redis`     | 150 MB       | ~20 MB        |
 | `caddy`     | 50 MB        | ~10 MB        |
@@ -603,7 +598,7 @@ The included `docker-compose.yml` has built-in support for **free HTTPS**:
 3. **Use the included `Caddyfile`:**
    ```
    {$CADDY_SITE:localhost} {
-     reverse_proxy zee-index:3000
+     reverse_proxy not-drive:3000
    }
    ```
 4. **Deploy** — Caddy automatically provisions SSL via Let's Encrypt
@@ -656,9 +651,9 @@ The included `docker-compose.yml` has built-in support for **free HTTPS**:
 
 ### Security Headers & CSP
 
-Zee-Index includes comprehensive security headers:
+NOT CLOUD includes comprehensive security headers:
 
-- **Content-Security-Policy** — Prevents XSS by restricting script/style/media sources
+- **CSP (Content Security Policy)**: Nonce-based, strict script/style whitelisting.
 - **Strict-Transport-Security** — Forces HTTPS (63072000s / ~2 years)
 - **X-Frame-Options: DENY** — Prevents clickjacking
 - **X-Content-Type-Options: nosniff** — Prevents MIME sniffing
@@ -667,9 +662,9 @@ Zee-Index includes comprehensive security headers:
 
 ---
 
-## 🔑 API Key Authentication
+## 🔑 REST API & API Keys
 
-Zee-Index supports **API key authentication** for programmatic access to its REST API — ideal for scripts, integrations, and third-party tools.
+NOT CLOUD supports **API key authentication** for programmatic access to its REST API — ideal for scripts, integrations, and third-party tools.
 
 ### Managing API Keys
 
@@ -847,7 +842,7 @@ Enhance your media library with rich metadata from **The Movie Database (TMDB)**
 1. Obtain an API key from [themoviedb.org](https://www.themoviedb.org/settings/api).
 2. Add `TMDB_API_KEY` to your `.env` file.
 3. Restart the application.
-4. Open any video file — Zee-Index will automatically search for matches and display posters, ratings, and cast information.
+4. Open any video file — NOT CLOUD will automatically search for matches and display posters, ratings, and cast information.
 
 ---
 
@@ -869,7 +864,7 @@ Enhance your media library with rich metadata from **The Movie Database (TMDB)**
 
 ## 🌍 Internationalization (i18n)
 
-Zee-Index supports multiple languages via `next-intl`:
+NOT CLOUD supports multiple languages via `next-intl`:
 
 | Language                 | Code    | Status      |
 | ------------------------ | ------- | ----------- |
@@ -1081,8 +1076,8 @@ Contributions are welcome! Here's how to get started:
 
 ```bash
 # 1. Fork and clone
-git clone https://github.com/YOUR_USERNAME/Zee-Index.git
-cd Zee-Index
+git clone https://github.com/YOUR_USERNAME/notDrive.git
+cd not-drive
 
 # 2. Create a feature branch
 git checkout -b feat/amazing-feature
@@ -1130,8 +1125,8 @@ See the [LICENSE](LICENSE) file for full details.
 
 ## Contributors
 
-<a href="https://github.com/ifauzeee/Zee-Index/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ifauzeee/Zee-Index" />
+<a href="https://github.com/cenooooot/notDrive/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cenooooot/notDrive" />
 </a>
 
 ---
@@ -1154,17 +1149,11 @@ Built with these amazing open-source projects:
 <div align="center">
   <br />
   <p>
-    <strong>⭐ If you find this project useful, please give it a star!</strong>
-  </p>
-  <br />
-  <p>
-    Crafted with ❤️ by <a href="https://github.com/ifauzeee">Muhammad Ibnu Fauzi</a>
+    Crafted with ❤️ by <a href="https://www.notnot.store/">CENOT</a>
   </p>
   <p>
-    <a href="https://github.com/ifauzeee/Zee-Index">GitHub</a>
+    <a href="https://www.notnot.store/">Website</a>
     ·
-    <a href="https://ifauzeee.vercel.app/projects/zee-index/preview">Preview</a>
-    ·
-    <a href="https://github.com/ifauzeee/Zee-Index/issues">Issues</a>
+    <a href="https://github.com/cenooooot/notDrive">GitHub</a>
   </p>
 </div>

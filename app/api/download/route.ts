@@ -140,7 +140,7 @@ async function handleDownload(request: NextRequest) {
 
     const googleRequestHeaders = new Headers();
     googleRequestHeaders.set("Authorization", `Bearer ${accessToken}`);
-    googleRequestHeaders.set("User-Agent", "Zee-Index-Streamer/1.0");
+    googleRequestHeaders.set("User-Agent", "NOT-CLOUD-Streamer/1.0");
     googleRequestHeaders.set("Accept-Encoding", "identity");
 
     const isGoogleDoc = fileDetails.mimeType.startsWith(

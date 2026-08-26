@@ -10,7 +10,7 @@ export async function GET() {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zee-Index API — Swagger UI</title>
+  <title>NOT CLOUD API — Swagger UI</title>
   <link rel="stylesheet" href="${SWAGGER_CDN}/swagger-ui.css" />
   <style>
     html { box-sizing: border-box; }
