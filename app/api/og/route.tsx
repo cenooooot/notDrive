@@ -3,8 +3,6 @@ import { createPublicRoute } from "@/lib/api-middleware";
 import idMessages from "@/messages/id.json";
 import enMessages from "@/messages/en.json";
 
-export const runtime = "edge";
-
 export const dynamic = "force-dynamic";
 
 export const GET = createPublicRoute(
