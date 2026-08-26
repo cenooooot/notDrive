@@ -220,7 +220,7 @@ export default function Header() {
     },
     {
       id: "github",
-      href: "https://github.com/ifauzeee/Zee-Index",
+      href: "https://www.notnot.store/",
       target: "_blank",
       rel: "noopener noreferrer",
       icon: Github,

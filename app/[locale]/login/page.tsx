@@ -349,12 +349,12 @@ function CustomLoginPage() {
           >
             © {new Date().getFullYear()} - {t("footer")}{" "}
             <a
-              href="https://ifauzeee.vercel.app/"
+              href="https://www.notnot.store/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-foreground hover:text-primary"
             >
-              Muhammad Ibnu Fauzi
+              CENOT
             </a>
           </p>
         </div>

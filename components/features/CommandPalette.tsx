@@ -224,7 +224,7 @@ export default function CommandPalette() {
             value="github repo source code"
             onSelect={() =>
               runCommand(() =>
-                window.open("https://github.com/ifauzeee/Zee-Index", "_blank"),
+                window.open("https://www.notnot.store/", "_blank"),
               )
             }
             className={itemClass}

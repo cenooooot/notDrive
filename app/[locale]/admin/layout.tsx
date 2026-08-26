@@ -36,12 +36,12 @@ const AppFooter = () => {
       <p>
         &copy; {currentYear} {t("rightsReserved")}{" "}
         <a
-          href="https://ifauzeee.vercel.app/"
+          href="https://www.notnot.store/"
           target="_blank"
           rel="noopener noreferrer"
           className="font-medium text-foreground hover:text-primary"
         >
-          Muhammad Ibnu Fauzi
+          CENOT
         </a>
       </p>
     </footer>

@@ -438,12 +438,12 @@ export default function SetupPage() {
           <p className="text-center text-xs text-muted-foreground pt-12">
             &copy; {new Date().getFullYear()} - {t("createdBy")}{" "}
             <a
-              href="https://ifauzeee.vercel.app/"
+              href="https://www.notnot.store/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-foreground hover:text-primary"
             >
-              Muhammad Ibnu Fauzi
+              CENOT
             </a>
           </p>
         </div>
