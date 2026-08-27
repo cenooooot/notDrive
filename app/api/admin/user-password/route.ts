@@ -1,8 +1,11 @@
 import { logger } from "@/lib/logger";
 import { NextResponse } from "next/server";
 import { createAdminRoute } from "@/lib/api-middleware";
-import { kv } from "@/lib/kv";
-import bcrypt from "bcryptjs";
+import {
+  setUserPassword,
+  removeUserPassword,
+  hasUserPassword,
+} from "@/lib/user-management";
 import { z } from "zod";
 
 const passwordRequestSchema = z.object({
@@ -22,8 +25,7 @@ export const POST = createAdminRoute(
   async ({ body }) => {
     try {
       const email = normalizeEmail(body.email);
-      const hashedPassword = await bcrypt.hash(body.password, 10);
-      await kv.set(`password:${email}`, hashedPassword);
+      await setUserPassword(email, body.password);
 
       return NextResponse.json({
         success: true,
@@ -44,7 +46,7 @@ export const DELETE = createAdminRoute(
   async ({ query }) => {
     try {
       const email = normalizeEmail(query.email);
-      await kv.del(`password:${email}`);
+      await removeUserPassword(email);
 
       return NextResponse.json({
         success: true,
@@ -67,11 +69,11 @@ export const GET = createAdminRoute(
   async ({ query }) => {
     try {
       const email = normalizeEmail(query.email);
-      const hasPassword = await kv.exists(`password:${email}`);
+      const hasPass = await hasUserPassword(email);
 
       return NextResponse.json({
         email,
-        hasPassword: hasPassword === 1,
+        hasPassword: hasPass,
       });
     } catch (error) {
       logger.error({ err: error }, "Error checking password");

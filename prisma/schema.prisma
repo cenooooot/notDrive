@@ -43,6 +43,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  password      String?
   /// ADMIN | EDITOR | USER (session may also use GUEST)
   role          String    @default("USER")
   accounts      Account[]

@@ -169,7 +169,18 @@ const authConfig: NextAuthConfig = {
             .replace(/^["']|["']$/g, "");
 
           let isPassValid = false;
-          if (isAdmin) {
+
+          // 1. Direct database password from PostgreSQL (Neon Tech)
+          if (dbUser?.password) {
+            try {
+              isPassValid = await bcrypt.compare(password, dbUser.password);
+            } catch (err) {
+              logger.error({ err }, "[Auth] Error comparing DB password");
+            }
+          }
+
+          // 2. Fallback to env pass (for initial bootstrap)
+          if (!isPassValid && isAdmin) {
             if (envPassHash) {
               isPassValid = await bcrypt.compare(password, envPassHash);
             } else if (envPass) {
@@ -178,6 +189,7 @@ const authConfig: NextAuthConfig = {
             }
           }
 
+          // 3. Fallback to Redis-stored password
           if (!isPassValid) {
             const storedUserPassword = await kv.get(
               `password:${normalizedInputEmail}`,
@@ -201,29 +213,40 @@ const authConfig: NextAuthConfig = {
             "[Auth] Login attempt",
           );
 
-          if (isAdmin && isPassValid) {
+          if (isPassValid) {
+            const finalRole = isAdmin ? "ADMIN" : (dbUser?.role || (await resolveRole(normalizedInputEmail)));
+
             emitAuthActivity("LOGIN_SUCCESS", {
               userEmail: normalizedInputEmail,
-              userRole: "ADMIN",
+              userRole: finalRole,
               status: "success",
             });
             logger.info(
-              { email: normalizedInputEmail },
-              "[Auth] Success: Credentials match",
+              { email: normalizedInputEmail, role: finalRole },
+              "[Auth] Success: Password match",
             );
 
             let currentUser = dbUser;
+            const hashedPassword = await bcrypt.hash(password, 10);
+
             if (!currentUser) {
               logger.info(
                 { email: normalizedInputEmail },
-                "[Auth] Creating missing admin user in DB",
+                "[Auth] Creating user in Neon DB",
               );
               currentUser = await db.user.create({
                 data: {
                   email: normalizedInputEmail,
-                  role: "ADMIN",
+                  role: finalRole,
                   name: normalizedInputEmail.split("@")[0],
+                  password: hashedPassword,
                 },
+              });
+            } else if (!currentUser.password) {
+              // Automatically sync/save password to Neon DB if missing
+              currentUser = await db.user.update({
+                where: { email: normalizedInputEmail },
+                data: { password: hashedPassword, role: finalRole },
               });
             }
 
@@ -231,39 +254,7 @@ const authConfig: NextAuthConfig = {
               id: currentUser.id,
               name: currentUser.name || normalizedInputEmail.split("@")[0],
               email: normalizedInputEmail,
-              role: "ADMIN",
-              isGuest: false,
-            };
-          }
-
-          if (!isAdmin && isPassValid) {
-            const role = await resolveRole(normalizedInputEmail);
-            let currentUser = dbUser;
-            if (!currentUser) {
-              currentUser = await db.user.create({
-                data: {
-                  email: normalizedInputEmail,
-                  role,
-                  name: normalizedInputEmail.split("@")[0],
-                },
-              });
-            }
-
-            emitAuthActivity("LOGIN_SUCCESS", {
-              userEmail: normalizedInputEmail,
-              userRole: role,
-              status: "success",
-            });
-            logger.info(
-              { email: normalizedInputEmail, role },
-              "[Auth] Success: User password match",
-            );
-
-            return {
-              id: currentUser.id,
-              name: currentUser.name || normalizedInputEmail.split("@")[0],
-              email: normalizedInputEmail,
-              role,
+              role: finalRole,
               isGuest: false,
             };
           }

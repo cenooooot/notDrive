@@ -21,7 +21,13 @@ export async function setUserPassword(
 ): Promise<void> {
   const normalized = email.toLowerCase().trim();
   const hash = await bcrypt.hash(password, 10);
-  await kv.set(`${USER_PASSWORD_PREFIX}${normalized}`, hash);
+  await Promise.allSettled([
+    kv.set(`${USER_PASSWORD_PREFIX}${normalized}`, hash),
+    db.user.updateMany({
+      where: { email: normalized },
+      data: { password: hash },
+    }),
+  ]);
 }
 
 function normalizeAdminEmails(): string[] {
@@ -42,7 +48,19 @@ export async function verifyUserPassword(
 ): Promise<boolean> {
   const normalized = email.toLowerCase().trim();
 
-  // 1. Check Redis-stored password (for users who set one via profile)
+  // 1. Check direct database password (PostgreSQL Neon)
+  try {
+    const dbUser = await db.user.findUnique({
+      where: { email: normalized },
+    });
+    if (dbUser?.password) {
+      if (await bcrypt.compare(password, dbUser.password)) return true;
+    }
+  } catch (err) {
+    logger.error({ err, email: normalized }, "Failed to verify DB user password");
+  }
+
+  // 2. Check Redis-stored password
   const hash = await kv.get<string>(`${USER_PASSWORD_PREFIX}${normalized}`);
   if (hash) {
     try {
@@ -50,12 +68,12 @@ export async function verifyUserPassword(
     } catch (err) {
       logger.error(
         { err, email: normalized },
-        "Failed to verify user password",
+        "Failed to verify user password from KV",
       );
     }
   }
 
-  // 2. Check env var passwords (for admin users from ADMIN_PASSWORD/ADMIN_PASSWORD_HASH)
+  // 3. Check env var passwords (for admin fallback)
   if (normalizeAdminEmails().includes(normalized)) {
     const envPassHash = (process.env.ADMIN_PASSWORD_HASH || "")
       .trim()
@@ -76,13 +94,28 @@ export async function verifyUserPassword(
 
 export async function hasUserPassword(email: string): Promise<boolean> {
   const normalized = email.toLowerCase().trim();
+  try {
+    const dbUser = await db.user.findUnique({
+      where: { email: normalized },
+    });
+    if (dbUser?.password) return true;
+  } catch (err) {
+    logger.debug({ err, email: normalized }, "Error checking DB password");
+  }
+
   const result = await kv.exists(`${USER_PASSWORD_PREFIX}${normalized}`);
   return result === 1;
 }
 
 export async function removeUserPassword(email: string): Promise<void> {
   const normalized = email.toLowerCase().trim();
-  await kv.del(`${USER_PASSWORD_PREFIX}${normalized}`);
+  await Promise.allSettled([
+    kv.del(`${USER_PASSWORD_PREFIX}${normalized}`),
+    db.user.updateMany({
+      where: { email: normalized },
+      data: { password: null },
+    }),
+  ]);
 }
 
 export async function upsertUser(
@@ -91,12 +124,25 @@ export async function upsertUser(
   password?: string,
 ): Promise<ManagedUser> {
   const normalized = email.toLowerCase().trim();
+  const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
+
   await db.user.upsert({
     where: { email: normalized },
-    create: { email: normalized, role, name: normalized.split("@")[0] },
-    update: { role },
+    create: {
+      email: normalized,
+      role,
+      name: normalized.split("@")[0],
+      ...(hashedPassword ? { password: hashedPassword } : {}),
+    },
+    update: {
+      role,
+      ...(hashedPassword ? { password: hashedPassword } : {}),
+    },
   });
-  if (password) await setUserPassword(normalized, password);
+
+  if (password) {
+    await kv.set(`${USER_PASSWORD_PREFIX}${normalized}`, hashedPassword!);
+  }
 
   return {
     email: normalized,

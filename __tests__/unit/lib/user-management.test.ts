@@ -11,6 +11,8 @@ const { mockKv, mockDb } = vi.hoisted(() => ({
     user: {
       upsert: vi.fn(),
       findMany: vi.fn(),
+      updateMany: vi.fn(),
+      findUnique: vi.fn(),
     },
   },
 }));
@@ -40,6 +42,8 @@ describe("lib/user-management", () => {
     mockKv.exists.mockResolvedValue(0);
     mockDb.user.upsert.mockResolvedValue({});
     mockDb.user.findMany.mockResolvedValue([]);
+    mockDb.user.updateMany.mockResolvedValue({ count: 1 });
+    mockDb.user.findUnique.mockResolvedValue(null);
   });
 
   it("sets and verifies a user password (bcrypt)", async () => {
