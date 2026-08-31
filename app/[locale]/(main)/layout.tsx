@@ -20,6 +20,7 @@ import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import GlobalDropZone from "@/components/file-browser/GlobalDropZone";
 import { usePathname, useSearchParams } from "next/navigation";
 import Loading from "@/components/common/Loading";
+import { MascotBackground } from "@/components/common/MascotBackground";
 import { useTranslations } from "next-intl";
 
 const Header = dynamic(() => import("@/components/layout/Header"), {
@@ -45,7 +46,7 @@ const AppFooter = () => {
   }
 
   return (
-    <footer className="text-center py-6 text-sm text-muted-foreground bg-background mb-16 lg:mb-0 w-full overflow-hidden">
+    <footer className="text-center py-6 text-sm text-muted-foreground bg-transparent mb-16 lg:mb-0 w-full overflow-hidden relative z-10">
       <div className="mb-2 flex items-center justify-center gap-2">
         <HardDrive size={14} />
         <span>{t("dataUsage")} </span>
@@ -145,6 +146,7 @@ function MainLayoutContent({ children }: { children: React.ReactNode }) {
         {tCommon("skipToContent")}
       </a>
       <Header />
+      <MascotBackground />
       <div className="flex flex-1 container max-w-full px-0 relative">
         {!isShareMode && <Sidebar />}
 
