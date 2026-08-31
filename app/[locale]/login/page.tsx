@@ -152,14 +152,14 @@ function CustomLoginPage() {
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
-      <div className="hidden lg:flex lg:w-1/2 items-center justify-center bg-muted/40 p-12 overflow-hidden relative">
-        <div className="relative w-[18rem] h-[18rem] lg:w-[22rem] lg:h-[22rem]">
+      <div className="hidden lg:flex lg:w-1/2 items-center justify-center bg-muted/40 p-8 lg:p-12 overflow-hidden relative">
+        <div className="relative w-[22rem] h-[22rem] lg:w-[28rem] lg:h-[28rem] xl:w-[34rem] xl:h-[34rem] max-w-full max-h-[80vh]">
           <Image
             src={MascotIcon}
             alt={t("driveLogoAlt")}
             fill
-            sizes="(max-width: 1024px) 288px, 352px"
-            className="object-contain drop-shadow-md"
+            sizes="(max-width: 1024px) 352px, (max-width: 1280px) 448px, 544px"
+            className="object-contain drop-shadow-2xl"
             priority
           />
         </div>
