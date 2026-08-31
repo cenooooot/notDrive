@@ -284,8 +284,12 @@ export function prepareResponseHeaders(
     (char) => "%" + char.charCodeAt(0).toString(16).toUpperCase(),
   );
 
-  const isDirectDownload = !range && !secFetchDest;
-  const disposition = isDirectDownload ? "attachment" : "inline";
+  const isStreamOrPreview =
+    !!range ||
+    secFetchDest === "video" ||
+    secFetchDest === "audio" ||
+    secFetchDest === "image";
+  const disposition = !isStreamOrPreview ? "attachment" : "inline";
 
   responseHeaders.set("Content-Type", mimeType);
   responseHeaders.set(

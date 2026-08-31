@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { formatBytes, formatDuration } from "@/lib/utils";
+import {
+  formatBytes,
+  formatDuration,
+  triggerDirectDownload,
+} from "@/lib/utils";
 import type { DriveFile } from "@/lib/drive";
 import {
   Plus,
@@ -356,16 +360,8 @@ export default function InfoPanel({
         </button>
 
         <button
-          onClick={() => {
-            const iframe = document.createElement("iframe");
-            iframe.style.display = "none";
-            iframe.src = directLink;
-            document.body.appendChild(iframe);
-            setTimeout(() => {
-              document.body.removeChild(iframe);
-            }, 5000);
-          }}
-          className="flex items-center justify-center px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 font-semibold"
+          onClick={() => triggerDirectDownload(directLink, file.name)}
+          className="flex items-center justify-center px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 font-semibold active:scale-95 cursor-pointer transition-all"
         >
           <Download size={18} className="mr-3" />
           {t("download")}

@@ -352,3 +352,21 @@ export function getBaseUrl(): string {
 
   return "http://localhost:3000";
 }
+
+export function triggerDirectDownload(url: string, filename?: string): void {
+  if (typeof window === "undefined") return;
+  const link = document.createElement("a");
+  link.href = url;
+  if (filename) {
+    link.download = filename;
+    link.setAttribute("download", filename);
+  }
+  link.style.display = "none";
+  document.body.appendChild(link);
+  link.click();
+  setTimeout(() => {
+    try {
+      document.body.removeChild(link);
+    } catch {}
+  }, 1000);
+}
