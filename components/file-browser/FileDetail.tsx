@@ -85,6 +85,7 @@ export default function FileDetail(props: FileDetailProps) {
           case "video":
             return (
               <VideoPlayer
+                fileId={file.id}
                 src={controller.directLink}
                 title={file.name}
                 type="video"
@@ -276,6 +277,7 @@ export default function FileDetail(props: FileDetailProps) {
               <div className="w-full h-full bg-black rounded-xl overflow-hidden flex items-center justify-center shadow-2xl ring-1 ring-white/10">
                 {!controller.internalPreviewOpen && (
                   <VideoPlayer
+                    fileId={file.id}
                     src={controller.directLink}
                     title={file.name}
                     type="video"

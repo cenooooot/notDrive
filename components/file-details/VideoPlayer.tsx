@@ -24,7 +24,10 @@ import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 
-import { VideoControlsOverlay } from "./video-player/Controls";
+import {
+  VideoControlsOverlay,
+  ExternalPlayerMenu,
+} from "./video-player/Controls";
 import {
   UpNextOverlay,
   NetworkErrorOverlay,
@@ -32,6 +35,8 @@ import {
   ResumePromptOverlay,
   WatermarkOverlay,
 } from "./video-player/Overlays";
+import { Tv } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface TimeUpdateDetail {
   currentTime: number;
@@ -45,6 +50,7 @@ interface VideoAudioPreviewProps {
   subtitleTracks?: SubtitleTrack[];
   onEnded?: () => void;
   webViewLink?: string;
+  fileId?: string;
 }
 
 export default function VideoPlayer({
@@ -55,6 +61,7 @@ export default function VideoPlayer({
   subtitleTracks,
   onEnded,
   webViewLink,
+  fileId,
 }: VideoAudioPreviewProps) {
   const {
     videoProgress,
@@ -78,6 +85,31 @@ export default function VideoPlayer({
   const [resumeTime, setResumeTime] = useState(0);
   const [upNextCountdown, setUpNextCountdown] = useState<number | null>(null);
   const controlsVisible = useMediaState("controlsVisible", playerRef);
+
+  const fileIdMatch = src.match(/fileId=([^&]+)/);
+  const resolvedFileId = fileId || (fileIdMatch ? fileIdMatch[1] : null);
+  const isGoogleDrive =
+    Boolean(resolvedFileId) && !resolvedFileId?.startsWith("local-storage:");
+
+  const [playerEngine, setPlayerEngine] = useState<"gdrive" | "custom">(
+    "gdrive",
+  );
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("not_cloud_video_engine");
+      if (saved === "custom" || saved === "gdrive") {
+        setPlayerEngine(saved);
+      }
+    } catch {}
+  }, []);
+
+  const handleSetEngine = (engine: "gdrive" | "custom") => {
+    setPlayerEngine(engine);
+    try {
+      localStorage.setItem("not_cloud_video_engine", engine);
+    } catch {}
+  };
 
   const tPlayer = useTranslations("VideoPlayer");
 
@@ -155,9 +187,6 @@ export default function VideoPlayer({
     };
   }, [subtitleTracks]);
 
-  const fileIdMatch = src.match(/fileId=([^&]+)/);
-  const fileId = fileIdMatch ? fileIdMatch[1] : null;
-
   useEffect(() => {
     setCurrentSrc(src);
     setNetworkError(false);
@@ -221,12 +250,12 @@ export default function VideoPlayer({
       player.play().catch(() => {});
       setHasResumed(true);
     } else if (
-      fileId &&
-      videoProgress[fileId] &&
+      resolvedFileId &&
+      videoProgress[resolvedFileId] &&
       playerRef.current &&
       !hasResumed
     ) {
-      const savedTime = videoProgress[fileId];
+      const savedTime = videoProgress[resolvedFileId];
       if (savedTime > 10) {
         setResumeTime(savedTime);
         setShowResumePrompt(true);
@@ -248,7 +277,7 @@ export default function VideoPlayer({
   };
 
   const skipResume = () => {
-    if (fileId) setVideoProgress(fileId, 0);
+    if (resolvedFileId) setVideoProgress(resolvedFileId, 0);
     setResumeTime(0);
     setShowResumePrompt(false);
     setHasResumed(true);
@@ -263,9 +292,9 @@ export default function VideoPlayer({
   };
 
   const handleTimeUpdate = (detail: TimeUpdateDetail) => {
-    if (fileId && detail.currentTime > 5 && !showResumePrompt) {
+    if (resolvedFileId && detail.currentTime > 5 && !showResumePrompt) {
       if (Math.floor(detail.currentTime) % 10 === 0) {
-        setVideoProgress(fileId, detail.currentTime);
+        setVideoProgress(resolvedFileId, detail.currentTime);
       }
     }
   };
@@ -286,6 +315,58 @@ export default function VideoPlayer({
     });
   }, [processedTracks]);
 
+  if (
+    playerEngine === "gdrive" &&
+    isGoogleDrive &&
+    type === "video" &&
+    resolvedFileId
+  ) {
+    return (
+      <div className="relative w-full h-full bg-black flex items-center justify-center rounded-xl overflow-hidden shadow-2xl min-h-[240px] md:min-h-[420px] group/gdrive">
+        <iframe
+          src={`https://drive.google.com/file/d/${resolvedFileId}/preview`}
+          className="w-full h-full min-h-[300px] md:min-h-[480px] border-0 bg-black"
+          allow="autoplay; fullscreen"
+          allowFullScreen
+          title={title}
+        />
+        <div className="absolute top-3 right-3 flex items-center gap-2 z-30 opacity-90 hover:opacity-100 transition-opacity bg-black/60 backdrop-blur-md p-1.5 rounded-xl border border-white/10 shadow-xl">
+          <button
+            onClick={() => handleSetEngine("custom")}
+            className="px-2.5 py-1 text-xs font-medium bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all flex items-center gap-1.5 active:scale-95"
+            title="Ganti ke Custom Player (Vidstack)"
+          >
+            <span>🎬</span>
+            <span className="hidden sm:inline">Custom Player</span>
+          </button>
+          {!sharePolicy?.preventDownload && (
+            <ExternalPlayerMenu
+              getAbsoluteSrc={getAbsoluteSrc}
+              onCopyUrl={() => {
+                navigator.clipboard.writeText(getAbsoluteSrc());
+                addToast({ message: "URL Stream disalin!", type: "success" });
+              }}
+            />
+          )}
+          {!isMobile && !sharePolicy?.preventDownload && (
+            <button
+              onClick={toggleTheaterMode}
+              className={cn(
+                "p-1.5 rounded-lg border border-white/10 transition-all",
+                isTheaterMode
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-black/40 hover:bg-white/20 text-white",
+              )}
+              title={tPlayer("theaterMode")}
+            >
+              <Tv size={14} />
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full h-full bg-black flex items-center justify-center rounded-xl overflow-hidden shadow-2xl min-h-[220px] md:min-h-[400px]">
       <MediaPlayer
@@ -300,7 +381,7 @@ export default function VideoPlayer({
         poster={poster?.replace("=s220", "=s1280")}
         aspectRatio={type === "video" ? "16/9" : undefined}
         onEnded={() => {
-          if (fileId) setVideoProgress(fileId, 0);
+          if (resolvedFileId) setVideoProgress(resolvedFileId, 0);
 
           if (playerRef.current) {
             const { currentTime, duration } = playerRef.current;
@@ -325,7 +406,7 @@ export default function VideoPlayer({
         playsInline
         load={isMobile ? "idle" : "eager"}
         posterLoad="visible"
-        preload="auto"
+        preload="metadata"
         streamType="on-demand"
         storage="local-storage"
         keyDisabled={false}
@@ -367,6 +448,8 @@ export default function VideoPlayer({
             isTheaterMode={isTheaterMode}
             webViewLink={webViewLink}
             preventDownload={sharePolicy?.preventDownload}
+            showGooglePlayerToggle={isGoogleDrive}
+            onSwitchToGooglePlayer={() => handleSetEngine("gdrive")}
             getAbsoluteSrc={getAbsoluteSrc}
             onCopyUrl={() => {
               navigator.clipboard.writeText(getAbsoluteSrc());

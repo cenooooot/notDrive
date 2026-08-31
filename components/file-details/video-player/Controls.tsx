@@ -103,9 +103,11 @@ interface VideoControlsOverlayProps {
   isTheaterMode: boolean;
   webViewLink?: string;
   preventDownload?: boolean;
+  showGooglePlayerToggle?: boolean;
   getAbsoluteSrc: () => string;
   onCopyUrl: () => void;
   onToggleTheater: () => void;
+  onSwitchToGooglePlayer?: () => void;
 }
 
 export function VideoControlsOverlay({
@@ -114,9 +116,11 @@ export function VideoControlsOverlay({
   isTheaterMode,
   webViewLink,
   preventDownload,
+  showGooglePlayerToggle,
   getAbsoluteSrc,
   onCopyUrl,
   onToggleTheater,
+  onSwitchToGooglePlayer,
 }: VideoControlsOverlayProps) {
   const t = useTranslations("VideoPlayer");
 
@@ -127,6 +131,17 @@ export function VideoControlsOverlay({
         controlsVisible ? "opacity-100" : "opacity-0 pointer-events-none",
       )}
     >
+      {showGooglePlayerToggle && onSwitchToGooglePlayer && (
+        <button
+          onClick={onSwitchToGooglePlayer}
+          className="px-3 py-1.5 bg-primary/90 hover:bg-primary text-primary-foreground rounded-xl backdrop-blur-md text-xs font-semibold transition-all shadow-lg flex items-center gap-1.5 border border-primary/40 active:scale-95"
+          title="Ganti ke Google Drive Player (Streaming Cepat Langsung CDN)"
+        >
+          <span>⚡</span>
+          <span>Google Player</span>
+        </button>
+      )}
+
       {!preventDownload && (
         <ExternalPlayerMenu
           getAbsoluteSrc={getAbsoluteSrc}
