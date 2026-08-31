@@ -30,9 +30,7 @@ export const metadata: Metadata = {
   description:
     "A modern, fast, and feature-rich Google Drive indexer built with Next.js. Stream, manage, and share your files effortlessly.",
   applicationName: "NOT CLOUD",
-  authors: [
-    { name: "CENOT", url: "https://www.notnot.store/" },
-  ],
+  authors: [{ name: "CENOT", url: "https://www.notnot.store/" }],
   generator: "Next.js",
   keywords: ["Google Drive", "Index", "File Manager", "Streaming", "Next.js"],
   manifest: "/manifest.webmanifest",

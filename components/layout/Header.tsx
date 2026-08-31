@@ -346,7 +346,7 @@ export default function Header() {
                 <Image
                   src={AppIcon}
                   alt={t("driveLogoAlt")}
-                  className="w-8 h-8 mr-3 dark:invert"
+                  className="w-8 h-8 mr-3 object-contain"
                 />
               )}
               <span className="font-bold">{appName || "NOT CLOUD"}</span>

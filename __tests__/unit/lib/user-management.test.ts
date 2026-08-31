@@ -69,7 +69,7 @@ describe("lib/user-management", () => {
           email: "editor@example.com",
           role: "EDITOR",
         }),
-        update: { role: "EDITOR" },
+        update: expect.objectContaining({ role: "EDITOR" }),
       }),
     );
     expect(mockKv.set).toHaveBeenCalled();

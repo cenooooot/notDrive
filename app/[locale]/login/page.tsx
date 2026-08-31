@@ -152,13 +152,14 @@ function CustomLoginPage() {
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       <div className="hidden lg:flex lg:w-1/2 items-center justify-center bg-muted/40 p-12 overflow-hidden relative">
-        <div className="relative w-[18rem] h-[18rem] lg:w-[22rem] lg:h-[22rem] opacity-20">
+        <div className="relative w-[18rem] h-[18rem] lg:w-[22rem] lg:h-[22rem]">
           <Image
             src={AppIcon}
             alt={t("driveLogoAlt")}
             fill
             sizes="(max-width: 1024px) 288px, 352px"
-            className="object-contain dark:invert"
+            className="object-contain drop-shadow-md"
+            priority
           />
         </div>
       </div>
@@ -173,7 +174,7 @@ function CustomLoginPage() {
                 width={36}
                 height={36}
                 priority
-                className="mr-3 object-contain dark:invert"
+                className="mr-3 object-contain"
               />
               <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
                 {t("title")}

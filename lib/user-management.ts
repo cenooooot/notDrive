@@ -57,7 +57,10 @@ export async function verifyUserPassword(
       if (await bcrypt.compare(password, dbUser.password)) return true;
     }
   } catch (err) {
-    logger.error({ err, email: normalized }, "Failed to verify DB user password");
+    logger.error(
+      { err, email: normalized },
+      "Failed to verify DB user password",
+    );
   }
 
   // 2. Check Redis-stored password

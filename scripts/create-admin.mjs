@@ -8,7 +8,10 @@ const prisma = new PrismaClient();
 
 async function main() {
   const args = process.argv.slice(2);
-  const email = args[0] || process.env.ADMIN_EMAIL || process.env.ADMIN_EMAILS?.split(",")[0];
+  const email =
+    args[0] ||
+    process.env.ADMIN_EMAIL ||
+    process.env.ADMIN_EMAILS?.split(",")[0];
   const password = args[1] || process.env.ADMIN_PASSWORD;
 
   if (!email || !password) {
@@ -33,7 +36,9 @@ async function main() {
     },
   });
 
-  console.log(`✅ Admin user [${user.email}] successfully created/updated in database with role ADMIN!`);
+  console.log(
+    `✅ Admin user [${user.email}] successfully created/updated in database with role ADMIN!`,
+  );
 }
 
 main()

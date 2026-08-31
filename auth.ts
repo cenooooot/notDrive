@@ -214,7 +214,15 @@ const authConfig: NextAuthConfig = {
           );
 
           if (isPassValid) {
-            const finalRole = isAdmin ? "ADMIN" : (dbUser?.role || (await resolveRole(normalizedInputEmail)));
+            const dbRole =
+              dbUser?.role === "ADMIN" ||
+              dbUser?.role === "EDITOR" ||
+              dbUser?.role === "USER"
+                ? dbUser.role
+                : undefined;
+            const finalRole: "ADMIN" | "EDITOR" | "USER" = isAdmin
+              ? "ADMIN"
+              : (dbRole ?? (await resolveRole(normalizedInputEmail)));
 
             emitAuthActivity("LOGIN_SUCCESS", {
               userEmail: normalizedInputEmail,
