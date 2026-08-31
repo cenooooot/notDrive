@@ -6,6 +6,7 @@ import { User, LockKeyhole } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import AppIcon from "@/app/icon.png";
+import MascotIcon from "@/public/cenot-drice-logo.png";
 import { useTranslations } from "next-intl";
 
 function CustomLoginPage() {
@@ -154,7 +155,7 @@ function CustomLoginPage() {
       <div className="hidden lg:flex lg:w-1/2 items-center justify-center bg-muted/40 p-12 overflow-hidden relative">
         <div className="relative w-[18rem] h-[18rem] lg:w-[22rem] lg:h-[22rem]">
           <Image
-            src={AppIcon}
+            src={MascotIcon}
             alt={t("driveLogoAlt")}
             fill
             sizes="(max-width: 1024px) 288px, 352px"
